@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <title>Contact - Werkman Uitzendbureau Netherlands</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content="Contact TransportPro for logistics solutions" />
+    <link rel="stylesheet" href="styles.css" />
+    <script type="module" src="script.js"></script>
+  </head>
+  <body>
+    <nav>
+      <div class="logo">Werkman Uitzendbureau</div>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="nav-links">
+        <a href="/">Startpagina</a>
+        <a href="/services.html">Diensten</a>
+        <a href="/about.html">Over Ons</a>
+        <a href="/contact.html" aria-current="page">Contact</a>
+      </div>
+    </nav>
+    <main>
+      <section class="hero contact-hero">
+        <h1 class="animate-title">Contact</h1>
+        <p class="animate-subtitle">Neem contact op met onze logistieke experts</p>
+      </section>
+
+      <section class="contact-grid">
+        <div class="contact-info">
+          <h2>Ons Kantoor</h2>
+          <div class="info-card">
+            <h3>Amsterdam Headquarters</h3>
+            <p>Transportweg 123</p>
+            <p>1234 AB Amsterdam</p>
+            <p>Netherlands</p>
+            <p>Tel: +31 20 123 4567</p>
+            <p>Email: info@ferhatkucuk.nl</p>
+          </div>
+          
+          <div class="info-card">
+            <h3>Openingstijden</h3>
+            <p>Maandag - Vrijdag: 8:00 - 18:00</p>
+            <p>24/7 Noodhulp Beschikbaar</p>
+          </div>
+        </div>
+
+        <div class="contact-form-container">
+          <form class="contact-form" id="contactForm">
+            <div class="form-group">
+              <label for="name">Naam</label>
+              <input type="text" id="name" name="name" required>
+            </div>
+
+            <div class="form-group">
+              <label for="email">E-mail</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Telefoon</label>
+              <input type="tel" id="phone" name="phone">
+            </div>
+
+            <div class="form-group">
+              <label for="service">Dienstbelang</label>
+              <select id="service" name="service">
+                <option value="">Selecteer een service</option>
+                <option value="freight">Goederenvervoer</option>
+                <option value="warehouse">Magazijnoplossingen</option>
+                <option value="logistics">Logistieke Oplossingen</option>
+                <option value="other">Ander</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Bericht</label>
+              <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+
+            <button type="submit" class="submit-button">Bericht Verzenden</button>
+          </form>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <p>© 2025 Werkman Uitzendbureau Netherlands. All rights reserved.</p>
+    </footer>
+  </body>
+</html>
