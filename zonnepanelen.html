@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <title>Zonnepanelen en Accu's - B-Tech Solutions</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content="Duurzame energie-oplossingen met zonnepanelen en accu's voor uw woning of bedrijf." />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script type="module" src="script.js"></script>
+    <style>
+      .service-intro {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 3rem 1.5rem;
+        text-align: center;
+      }
+      
+      .service-intro h2 {
+        font-size: 2.2rem;
+        margin-bottom: 1.5rem;
+        color: var(--primary);
+      }
+      
+      .service-intro p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      
+      .service-features-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto 3rem;
+        padding: 0 1.5rem;
+      }
+      
+      .feature-item {
+        background: var(--bg-light);
+        border-radius: 10px;
+        padding: 1.5rem;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        display: flex;
+        align-items: flex-start;
+      }
+      
+      .feature-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      }
+      
+      .feature-icon {
+        font-size: 2rem;
+        color: var(--primary);
+        margin-right: 1rem;
+        min-width: 50px;
+        text-align: center;
+      }
+      
+      .feature-content h3 {
+        font-size: 1.3rem;
+        margin-bottom: 0.8rem;
+        color: var(--primary);
+      }
+      
+      .feature-content p {
+        font-size: 1rem;
+        line-height: 1.5;
+        color: var(--text-secondary);
+      }
+      
+      .image-gallery {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        max-width: 1200px;
+        margin: 0 auto 3rem;
+        padding: 0 1.5rem;
+      }
+      
+      .gallery-item {
+        border-radius: 8px;
+        overflow: hidden;
+        height: 250px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+        position: relative;
+      }
+      
+      .gallery-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      }
+      
+      .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+      
+      .gallery-item:hover img {
+        transform: scale(1.05);
+      }
+      
+      .gallery-item::after {
+        content: "\f00e";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        background: rgba(0, 0, 0, 0.6);
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+      
+      .gallery-item:hover::after {
+        opacity: 1;
+      }
+      
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+        overflow: auto;
+        transition: opacity 0.3s ease;
+      }
+      
+      .modal-content {
+        display: block;
+        margin: auto;
+        max-width: 90%;
+        max-height: 90vh;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+      }
+      
+      .close {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        color: #f1f1f1;
+        font-size: 40px;
+        font-weight: bold;
+        transition: 0.3s;
+        z-index: 1001;
+      }
+      
+      .close:hover,
+      .close:focus {
+        color: var(--primary);
+        text-decoration: none;
+        cursor: pointer;
+      }
+      
+      .section-title {
+        text-align: center;
+        margin-bottom: 2.5rem;
+        font-size: 2rem;
+        color: var(--primary);
+      }
+      
+      .section-title::after {
+        content: "";
+        display: block;
+        width: 80px;
+        height: 4px;
+        background: var(--primary);
+        margin: 0.8rem auto 0;
+        border-radius: 2px;
+      }
+      
+      .modal-nav {
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 20px;
+        box-sizing: border-box;
+        transform: translateY(-50%);
+        z-index: 1002;
+      }
+      
+      .modal-nav button {
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.3s ease;
+      }
+      
+      .modal-nav button:hover {
+        background-color: var(--primary);
+      }
+      
+      .modal-counter {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: white;
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 14px;
+        z-index: 1001;
+      }
+      
+      .service-process h2 {
+        color: var(--primary);
+        text-align: center;
+        margin-bottom: 2.5rem;
+        font-size: 2rem;
+      }
+      
+      .service-process h2::after {
+        content: "";
+        display: block;
+        width: 80px;
+        height: 4px;
+        background: var(--primary);
+        margin: 0.8rem auto 0;
+        border-radius: 2px;
+      }
+      
+      .process-step h3 {
+        color: var(--primary);
+      }
+      
+      .service-cta-content h2 {
+        color: var(--primary);
+      }
+      
+      .modal-content-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        touch-action: pan-y;
+      }
+      
+      @media (max-width: 768px) {
+        .service-features-grid {
+          grid-template-columns: 1fr;
+        }
+        
+        .image-gallery {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .modal-nav button {
+          width: 40px;
+          height: 40px;
+          font-size: 20px;
+        }
+        
+        .close {
+          top: 10px;
+          right: 15px;
+          font-size: 30px;
+        }
+        
+        .modal-content {
+          max-width: 95%;
+          max-height: 80vh;
+        }
+      }
+      
+      @media (max-width: 480px) {
+        .image-gallery {
+          grid-template-columns: 1fr;
+        }
+        
+        .service-intro h2 {
+          font-size: 1.8rem;
+        }
+        
+        .modal-nav {
+          padding: 0 10px;
+        }
+        
+        .modal-nav button {
+          width: 36px;
+          height: 36px;
+          font-size: 18px;
+        }
+        
+        .feature-item {
+          padding: 1.2rem;
+        }
+        
+        .feature-icon {
+          font-size: 1.8rem;
+          min-width: 40px;
+        }
+        
+        .feature-content h3 {
+          font-size: 1.2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="logo" >
+        <a href="#top"><img src="img/Logo.png" href="index.html" alt="B-Tech Solutions Logo"></a>
+      </div>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="nav-links">
+        <a href="index.html">Startpagina</a>
+        <div class="dropdown">
+          <div class="dropdown-toggle">Diensten</div>
+          <div class="dropdown-menu">
+            <a href="huisinstallaties.html">Huisinstallaties en verlichting</a>
+            <a href="zonnepanelen.html" aria-current="page">Zonnepanelen en Accu's</a>
+            <a href="laadpalen.html">Laadpalen</a>
+            <a href="renovatie.html">Allround - Renovatie werkzaamheden</a>
+            <a href="software.html">Softwareoplossingen</a>
+            <a href="cleaning.html">Cleaning & Services</a>
+          </div>
+        </div>
+        <a href="about.html">Over Ons</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </nav>
+    <main>
+      <section class="hero service-hero" id="top">
+        <h1 class="animate-title">Zonnepanelen en Accu's</h1>
+        <p class="animate-subtitle">Duurzame energie-oplossingen voor een groenere toekomst</p>
+      </section>
+
+      <section class="service-intro">
+        <h2 style="color: var(--accent-color); font-size: 2.5rem;">De Slimme Keuze voor Duurzame Energie</h2>
+        <p>Het gebruik van zonnepanelen is een uitstekende manier om zelf energie op te wekken en je huis te verduurzamen. Door de kracht van de zon te benutten, kun je je eigen elektriciteit produceren en besparen op je energiekosten. Maar de voordelen stoppen niet bij het opwekken van energie. Met de toevoeging van accu's kun je de opgewekte stroom ook opslaan, zodat je altijd beschikt over energie, zelfs wanneer de zon niet schijnt. </p>
+        <p>Het is nog steeds zeer relevant om zelf stroom op te wekken met zonnepanelen, vooral nu we te maken hebben met stijgende energieprijzen en een onzekere energievoorziening. Het vermogen om zelf opgewekte stroom op te slaan in accu's maakt je zelfvoorzienend en geeft je meer controle over je energieverbruik. 
+
+          Met de opslagcapaciteit van moderne accu’s kun je de opgewekte stroom gebruiken wanneer je dat nodig hebt, bijvoorbeeld 's avonds wanneer de zon niet schijnt. Dit betekent dat je niet afhankelijk hoeft te zijn van het elektriciteitsnet of dure piekuren van energieleveranciers. Het opslaan van energie biedt dus niet alleen onafhankelijkheid, maar ook een kosteneffectieve manier om energie te beheren.</p>
+      </section>
+
+      <section>
+        <h2 class="section-title" style="color: var(--accent-color);">Voordelen van Zonnepanelen en Accu's</h2>
+        <div class="service-features-grid">
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fas fa-leaf"></i>
+            </div>
+            <div class="feature-content">
+              <h3 style="color: var(--accent-color);">Duurzaam en Milieu-vriendelijk</h3>
+              <p>Zonnepanelen zetten zonlicht om in elektriciteit zonder schadelijke uitstoot. Dit draagt direct bij aan een lagere CO2-voetafdruk en een duurzamer milieu.</p>
+            </div>
+          </div>
+          
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fas fa-euro-sign"></i>
+            </div>
+            <div class="feature-content">
+              <h3 style="color: var(--accent-color);">Besparen op Energiekosten</h3>
+              <p>Door je eigen energie op te wekken, hoef je minder energie van energieleveranciers af te nemen. Dit kan resulteren in aanzienlijke besparingen op je maandelijkse energiekosten.</p>
+            </div>
+          </div>
+          
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fas fa-bolt"></i>
+            </div>
+            <div class="feature-content">
+              <h3 style="color: var(--accent-color);">Onafhankelijkheid van de Energieleverancier</h3>
+              <p>Met zonnepanelen ben je minder afhankelijk van de energiemarkt. Je wekt je eigen stroom op en kunt deze opslaan in accu's voor later gebruik. Dit biedt stabiliteit en zekerheid in tijden van energietekorten of prijsstijgingen.</p>
+            </div>
+          </div>
+          
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fas fa-battery-full"></i>
+            </div>
+            <div class="feature-content">
+              <h3 style="color: var(--accent-color);">Energie Opslaan</h3>
+              <p>Met een energieaccu kun je de overtollige energie die je overdag opwekt opslaan voor gebruik in de avond of tijdens bewolkte dagen. Dit maakt het systeem veel efficiënter en zorgt ervoor dat je altijd toegang hebt tot je eigen opgewekte energie.</p>
+            </div>
+          </div>
+          
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fas fa-home"></i>
+            </div>
+            <div class="feature-content">
+              <h3 style="color: var(--accent-color);">Verhoogde Waarde van je Huis</h3>
+              <p>Woningen met zonnepanelen en een energie-opslagsysteem zijn vaak meer waard op de vastgoedmarkt. Potentiële kopers zien de voordelen van lagere energiekosten en een duurzamer huis.</p>
+            </div>
+          </div>
+          
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fas fa-wallet"></i>
+            </div>
+            <div class="feature-content">
+              <h3 style="color: var(--accent-color);">Installaties voor Elk Budget</h3>
+              <p>We begrijpen dat elke woning en elk budget anders is. Daarom bieden we voor iedereen een passende installatie aan. Of je nu een klein systeem wilt voor een lagere energiebesparing of een grotere installatie met accu's om volledige onafhankelijkheid van het net te bereiken, er is altijd een oplossing die aansluit bij jouw wensen en budget.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="image-gallery">
+          <div class="gallery-item" data-img="img/zonnepanelen/1.jpg" data-index="0">
+            <img src="img/zonnepanelen/1.jpg" alt="Zonnepanelen installatie">
+          </div>
+          <div class="gallery-item" data-img="img/zonnepanelen/2.jpg" data-index="1">
+            <img src="img/zonnepanelen/2.jpg" alt="Zonnepanelen op dak">
+          </div>
+          <div class="gallery-item" data-img="img/zonnepanelen/3.jpg" data-index="2">
+            <img src="img/zonnepanelen/3.jpg" alt="Accu systeem">
+          </div>
+          <div class="gallery-item" data-img="img/zonnepanelen/4.jpg" data-index="3">
+            <img src="img/zonnepanelen/4.jpg" alt="Zonnepanelen installatie project">
+          </div>
+          <div class="gallery-item" data-img="img/zonnepanelen/5.jpg" data-index="4">
+            <img src="img/zonnepanelen/5.jpg" alt="Thuisbatterij systeem">
+          </div>
+          <div class="gallery-item" data-img="img/zonnepanelen/6.jpg" data-index="5">
+            <img src="img/zonnepanelen/6.jpg" alt="Zonnepanelen monitoring">
+          </div>
+        </div>
+      </section>
+
+      <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <div class="modal-nav">
+          <button id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+          <button id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <div class="modal-content-container">
+          <img class="modal-content" id="modalImage">
+        </div>
+        <div class="modal-counter" id="modalCounter">1 / 6</div>
+      </div>
+
+      <section class="service-process">
+        <h2>Ons Werkproces</h2>
+        <div class="process-steps">
+          <div class="process-step">
+            <div class="step-number">1</div>
+            <i class="fas fa-clipboard-list"></i>
+            <h3>Gratis Adviesgesprek</h3>
+            <p>We analyseren uw energiebehoefte en dakpotentieel voor een optimaal systeem.</p>
+          </div>
+          <div class="process-step">
+            <div class="step-number">2</div>
+            <i class="fas fa-file-invoice"></i>
+            <h3>Offerte</h3>
+            <p>U ontvangt een gedetailleerde offerte met alle specificaties en kosten.</p>
+          </div>
+          <div class="process-step">
+            <div class="step-number">3</div>
+            <i class="fas fa-tools"></i>
+            <h3>Installatie</h3>
+            <p>Onze ervaren installateurs zorgen voor een snelle en professionele montage.</p>
+          </div>
+          <div class="process-step">
+            <div class="step-number">4</div>
+            <i class="fas fa-headset"></i>
+            <h3>Nazorg</h3>
+            <p>We bieden uitgebreide garantie en ondersteuning na de installatie.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="service-cta-section">
+        <div class="service-cta-content">
+          <h2>Klaar om te investeren in duurzame energie?</h2>
+          <p>Neem contact met ons op voor een vrijblijvende offerte</p>
+          <a href="contact.html" class="cta-button">Vraag een offerte aan</a>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <p>© 2025 B-Tech Solutions. All rights reserved.</p>
+    </footer>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const closeBtn = document.getElementsByClassName('close')[0];
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const modalCounter = document.getElementById('modalCounter');
+        const modalContentContainer = document.querySelector('.modal-content-container');
+        
+        let currentIndex = 0;
+        const totalImages = galleryItems.length;
+        
+        // Görselleri yükle
+        const images = Array.from(galleryItems).map(item => item.getAttribute('data-img'));
+        
+        // Görsele tıklandığında modalı aç
+        galleryItems.forEach(item => {
+          item.addEventListener('click', function() {
+            currentIndex = parseInt(this.getAttribute('data-index'));
+            openModal();
+            updateModalImage();
+          });
+        });
+        
+        // Modalı açma fonksiyonu
+        function openModal() {
+          modal.style.display = "block";
+          updateCounter();
+        }
+        
+        // Modalı kapatma
+        closeBtn.addEventListener('click', function() {
+          modal.style.display = "none";
+        });
+        
+        // Boş alana tıklandığında modalı kapat
+        modal.addEventListener('click', function(event) {
+          if (event.target === modal) {
+            modal.style.display = "none";
+          }
+        });
+        
+        // Önceki görsel
+        prevBtn.addEventListener('click', function() {
+          currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+          updateModalImage();
+        });
+        
+        // Sonraki görsel
+        nextBtn.addEventListener('click', function() {
+          currentIndex = (currentIndex + 1) % totalImages;
+          updateModalImage();
+        });
+        
+        // Klavye ile gezinme
+        document.addEventListener('keydown', function(event) {
+          if (modal.style.display === "block") {
+            if (event.key === "ArrowLeft") {
+              currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+              updateModalImage();
+            } else if (event.key === "ArrowRight") {
+              currentIndex = (currentIndex + 1) % totalImages;
+              updateModalImage();
+            } else if (event.key === "Escape") {
+              modal.style.display = "none";
+            }
+          }
+        });
+        
+        // Modal görselini güncelle
+        function updateModalImage() {
+          modalImg.src = images[currentIndex];
+          updateCounter();
+        }
+        
+        // Sayaç güncelleme
+        function updateCounter() {
+          modalCounter.textContent = `${currentIndex + 1} / ${totalImages}`;
+        }
+        
+        // Dokunmatik kaydırma desteği
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        modalContentContainer.addEventListener('touchstart', function(event) {
+          touchStartX = event.changedTouches[0].screenX;
+        }, false);
+        
+        modalContentContainer.addEventListener('touchend', function(event) {
+          touchEndX = event.changedTouches[0].screenX;
+          handleSwipe();
+        }, false);
+        
+        function handleSwipe() {
+          if (touchEndX < touchStartX - 50) {
+            // Sola kaydırma - sonraki görsel
+            currentIndex = (currentIndex + 1) % totalImages;
+            updateModalImage();
+          } else if (touchEndX > touchStartX + 50) {
+            // Sağa kaydırma - önceki görsel
+            currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+            updateModalImage();
+          }
+        }
+      });
+    </script>
+  </body>
+</html> 

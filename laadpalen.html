@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <title>Laadpalen - B-Tech Solutions</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content="Professionele installatie van laadpalen voor elektrische voertuigen bij u thuis of op uw bedrijfsterrein." />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script type="module" src="script.js"></script>
+    <style>
+      .service-intro {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 3rem 1.5rem;
+        text-align: center;
+      }
+      
+      .service-intro h2 {
+        font-size: 2.2rem;
+        margin-bottom: 1.5rem;
+        color: var(--primary);
+      }
+      
+      .service-intro p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      
+      .service-features-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto 3rem;
+        padding: 0 1.5rem;
+      }
+      
+      .feature-item {
+        background: var(--bg-light);
+        border-radius: 10px;
+        padding: 1.5rem;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        display: flex;
+        align-items: flex-start;
+      }
+      
+      .feature-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      }
+      
+      .feature-icon {
+        font-size: 2rem;
+        color: var(--primary);
+        margin-right: 1rem;
+        min-width: 50px;
+        text-align: center;
+      }
+      
+      .feature-content h3 {
+        font-size: 1.3rem;
+        margin-bottom: 0.8rem;
+        color: var(--primary);
+      }
+      
+      .feature-content p {
+        font-size: 1rem;
+        line-height: 1.5;
+        color: var(--text-secondary);
+      }
+      
+      .image-gallery {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        max-width: 1200px;
+        margin: 0 auto 3rem;
+        padding: 0 1.5rem;
+      }
+      
+      .gallery-item {
+        border-radius: 8px;
+        overflow: hidden;
+        height: 250px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+        position: relative;
+      }
+      
+      .gallery-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      }
+      
+      .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+      
+      .gallery-item:hover img {
+        transform: scale(1.05);
+      }
+      
+      .gallery-item::after {
+        content: "\f00e";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        background: rgba(0, 0, 0, 0.6);
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+      
+      .gallery-item:hover::after {
+        opacity: 1;
+      }
+      
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+        overflow: auto;
+        transition: opacity 0.3s ease;
+      }
+      
+      .modal-content {
+        display: block;
+        margin: auto;
+        max-width: 90%;
+        max-height: 90vh;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+      }
+      
+      .close {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        color: #f1f1f1;
+        font-size: 40px;
+        font-weight: bold;
+        transition: 0.3s;
+        z-index: 1001;
+      }
+      
+      .close:hover,
+      .close:focus {
+        color: var(--primary);
+        text-decoration: none;
+        cursor: pointer;
+      }
+      
+      .section-title {
+        text-align: center;
+        margin-bottom: 2.5rem;
+        font-size: 2rem;
+        color: var(--primary);
+      }
+      
+      .section-title::after {
+        content: "";
+        display: block;
+        width: 80px;
+        height: 4px;
+        background: var(--primary);
+        margin: 0.8rem auto 0;
+        border-radius: 2px;
+      }
+      
+      .modal-nav {
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 20px;
+        box-sizing: border-box;
+        transform: translateY(-50%);
+        z-index: 1002;
+      }
+      
+      .modal-nav button {
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.3s ease;
+      }
+      
+      .modal-nav button:hover {
+        background-color: var(--primary);
+      }
+      
+      .modal-counter {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: white;
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 14px;
+        z-index: 1001;
+      }
+      
+      .service-process h2 {
+        color: var(--primary);
+        text-align: center;
+        margin-bottom: 2.5rem;
+        font-size: 2rem;
+      }
+      
+      .service-process h2::after {
+        content: "";
+        display: block;
+        width: 80px;
+        height: 4px;
+        background: var(--primary);
+        margin: 0.8rem auto 0;
+        border-radius: 2px;
+      }
+      
+      .process-step h3 {
+        color: var(--primary);
+      }
+      
+      .service-cta-content h2 {
+        color: var(--primary);
+      }
+      
+      .modal-content-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        touch-action: pan-y;
+      }
+      
+      @media (max-width: 768px) {
+        .service-features-grid {
+          grid-template-columns: 1fr;
+        }
+        
+        .image-gallery {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .modal-nav button {
+          width: 40px;
+          height: 40px;
+          font-size: 20px;
+        }
+        
+        .close {
+          top: 10px;
+          right: 15px;
+          font-size: 30px;
+        }
+        
+        .modal-content {
+          max-width: 95%;
+          max-height: 80vh;
+        }
+      }
+      
+      @media (max-width: 480px) {
+        .image-gallery {
+          grid-template-columns: 1fr;
+        }
+        
+        .service-intro h2 {
+          font-size: 1.8rem;
+        }
+        
+        .modal-nav {
+          padding: 0 10px;
+        }
+        
+        .modal-nav button {
+          width: 36px;
+          height: 36px;
+          font-size: 18px;
+        }
+        
+        .feature-item {
+          padding: 1.2rem;
+        }
+        
+        .feature-icon {
+          font-size: 1.8rem;
+          min-width: 40px;
+        }
+        
+        .feature-content h3 {
+          font-size: 1.2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="logo" >
+        <a href="#top"><img src="img/Logo.png" href="index.html" alt="B-Tech Solutions Logo"></a>
+      </div>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="nav-links">
+        <a href="index.html">Startpagina</a>
+        <div class="dropdown">
+          <div class="dropdown-toggle">Diensten</div>
+          <div class="dropdown-menu">
+            <a href="huisinstallaties.html">Huisinstallaties en verlichting</a>
+            <a href="zonnepanelen.html">Zonnepanelen en Accu's</a>
+            <a href="laadpalen.html" aria-current="page">Laadpalen</a>
+            <a href="renovatie.html">Allround - Renovatie werkzaamheden</a>
+            <a href="software.html">Softwareoplossingen</a>
+            <a href="cleaning.html">Cleaning & Services</a>
+          </div>
+        </div>
+        <a href="about.html">Over Ons</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </nav>
+    <main>
+      <section class="hero service-hero" id="top">
+        <h1 class="animate-title">Laadpalen</h1>
+        <p class="animate-subtitle">Toekomstgerichte oplaadoplossingen voor elektrische voertuigen</p>
+      </section>
+
+      <section class="service-intro">
+        <h2 style="color: var(--accent-color); font-size: 2.5rem;">Gemakkelijk, Snel en Duurzaam Opladen Thuis</h2>
+        <p>Met de opkomst van elektrische voertuigen (EV's) wordt het steeds belangrijker om thuis de mogelijkheid te hebben om je auto op te laden. Laadpalen bieden een snelle, veilige en efficiënte manier om je elektrische auto thuis van stroom te voorzien, zonder dat je afhankelijk bent van openbare laadstations.</p>
+      </section>
+
+      <section>
+        <h2 class="section-title" style="color: var(--accent-color);">Voordelen van Thuisladen met een Laadpaal</h2>
+        <div class="service-features-grid">
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fas fa-home"></i>
+            </div>
+            <div class="feature-content">
+              <h3 style="color: var(--accent-color);">Eenvoudig en Handig</h3>
+              <p>Met een laadpaal in je eigen oprit of garage kun je je elektrische voertuig gemakkelijk thuis opladen. Dit betekent dat je niet hoeft te zoeken naar een openbaar laadstation of je zorgen hoeft te maken over lange wachttijden.</p>
+            </div>
+          </div>
+          
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fas fa-bolt"></i>
+            </div>
+            <div class="feature-content">
+              <h3 style="color: var(--accent-color);">Snellere Oplaadtijd</h3>
+              <p>Laadpalen voor thuis bieden vaak snellere laadtijden dan standaard stopcontacten, zodat je auto sneller volledig opgeladen is en je weer verder kunt rijden.</p>
+            </div>
+          </div>
+          
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fas fa-euro-sign"></i>
+            </div>
+            <div class="feature-content">
+              <h3 style="color: var(--accent-color);">Kostenbesparing</h3>
+              <p>Thuis opladen is doorgaans goedkoper dan laden bij openbare laadstations, vooral als je gebruik maakt van overtollige stroom die je hebt opgewekt met zonnepanelen. Dit kan je kosten op lange termijn aanzienlijk verlagen.</p>
+            </div>
+          </div>
+          
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fas fa-sliders-h"></i>
+            </div>
+            <div class="feature-content">
+              <h3 style="color: var(--accent-color);">Energiebeheer</h3>
+              <p>Bij veel laadpalen kun je het laden plannen, bijvoorbeeld wanneer de energiekosten laag zijn of wanneer je eigen zonnepanelen extra energie produceren. Dit geeft je volledige controle over je energieverbruik en kosten.</p>
+            </div>
+          </div>
+          
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <div class="feature-content">
+              <h3 style="color: var(--accent-color);">Toekomstbestendig</h3>
+              <p>Met de groeiende populariteit van elektrische voertuigen is het slim om nu al te investeren in een laadpaal voor thuis. Het biedt niet alleen gemak, maar maakt je huis ook toekomstbestendig, aangezien de vraag naar laadfaciliteiten de komende jaren alleen maar zal toenemen.</p>
+            </div>
+          </div>
+          
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fas fa-wallet"></i>
+            </div>
+            <div class="feature-content">
+              <h3 style="color: var(--accent-color);">Oplaadpunten voor Elk Budget</h3>
+              <p>Net als bij zonnepanelen en andere installaties bieden wij laadpalen aan voor elke portemonnee. Van eenvoudige modellen tot slimme laadpalen met geavanceerde functies zoals app-integratie, verbruiksoverzichten en planning, er is altijd een laadoplossing die bij jouw wensen en budget past.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="image-gallery">
+          <div class="gallery-item" data-img="img/laadpalen/1.jpg" data-index="0">
+            <img src="img/laadpalen/1.jpg" alt="Laadpaal installatie thuis">
+          </div>
+          <div class="gallery-item" data-img="img/laadpalen/2.jpg" data-index="1">
+            <img src="img/laadpalen/2.jpg" alt="Elektrische auto opladen">
+          </div>
+          <div class="gallery-item" data-img="img/laadpalen/3.jpg" data-index="2">
+            <img src="img/laadpalen/3.jpg" alt="Laadpaal met zonnepanelen">
+          </div>
+        </div>
+      </section>
+
+      <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <div class="modal-nav">
+          <button id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+          <button id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <div class="modal-content-container">
+          <img class="modal-content" id="modalImage">
+        </div>
+        <div class="modal-counter" id="modalCounter">1 / 3</div>
+      </div>
+
+      <section class="service-process">
+        <h2>Ons Werkproces</h2>
+        <div class="process-steps">
+          <div class="process-step">
+            <div class="step-number">1</div>
+            <i class="fas fa-search"></i>
+            <h3>Locatie Inspectie</h3>
+            <p>We beoordelen uw locatie om de beste laadoplossing te bepalen.</p>
+          </div>
+          <div class="process-step">
+            <div class="step-number">2</div>
+            <i class="fas fa-file-invoice"></i>
+            <h3>Offerte</h3>
+            <p>U ontvangt een gedetailleerde offerte met alle specificaties en kosten.</p>
+          </div>
+          <div class="process-step">
+            <div class="step-number">3</div>
+            <i class="fas fa-tools"></i>
+            <h3>Installatie</h3>
+            <p>Onze gecertificeerde technici installeren uw laadstation volgens de hoogste veiligheidsnormen.</p>
+          </div>
+          <div class="process-step">
+            <div class="step-number">4</div>
+            <i class="fas fa-check-circle"></i>
+            <h3>Oplevering</h3>
+            <p>We testen het systeem grondig en geven u een uitgebreide instructie over het gebruik.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="service-cta-section">
+        <div class="service-cta-content">
+          <h2>Klaar voor de overstap naar elektrisch rijden?</h2>
+          <p>Neem contact met ons op voor een vrijblijvende offerte</p>
+          <a href="contact.html" class="cta-button">Vraag een offerte aan</a>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <p>© 2025 B-Tech Solutions. All rights reserved.</p>
+    </footer>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const closeBtn = document.getElementsByClassName('close')[0];
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const modalCounter = document.getElementById('modalCounter');
+        const modalContentContainer = document.querySelector('.modal-content-container');
+        
+        let currentIndex = 0;
+        const totalImages = galleryItems.length;
+        
+        // Görselleri yükle
+        const images = Array.from(galleryItems).map(item => item.getAttribute('data-img'));
+        
+        // Görsele tıklandığında modalı aç
+        galleryItems.forEach(item => {
+          item.addEventListener('click', function() {
+            currentIndex = parseInt(this.getAttribute('data-index'));
+            openModal();
+            updateModalImage();
+          });
+        });
+        
+        // Modalı açma fonksiyonu
+        function openModal() {
+          modal.style.display = "block";
+          updateCounter();
+        }
+        
+        // Modalı kapatma
+        closeBtn.addEventListener('click', function() {
+          modal.style.display = "none";
+        });
+        
+        // Boş alana tıklandığında modalı kapat
+        modal.addEventListener('click', function(event) {
+          if (event.target === modal) {
+            modal.style.display = "none";
+          }
+        });
+        
+        // Önceki görsel
+        prevBtn.addEventListener('click', function() {
+          currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+          updateModalImage();
+        });
+        
+        // Sonraki görsel
+        nextBtn.addEventListener('click', function() {
+          currentIndex = (currentIndex + 1) % totalImages;
+          updateModalImage();
+        });
+        
+        // Klavye ile gezinme
+        document.addEventListener('keydown', function(event) {
+          if (modal.style.display === "block") {
+            if (event.key === "ArrowLeft") {
+              currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+              updateModalImage();
+            } else if (event.key === "ArrowRight") {
+              currentIndex = (currentIndex + 1) % totalImages;
+              updateModalImage();
+            } else if (event.key === "Escape") {
+              modal.style.display = "none";
+            }
+          }
+        });
+        
+        // Modal görselini güncelle
+        function updateModalImage() {
+          modalImg.src = images[currentIndex];
+          updateCounter();
+        }
+        
+        // Sayaç güncelleme
+        function updateCounter() {
+          modalCounter.textContent = `${currentIndex + 1} / ${totalImages}`;
+        }
+        
+        // Dokunmatik kaydırma desteği
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        modalContentContainer.addEventListener('touchstart', function(event) {
+          touchStartX = event.changedTouches[0].screenX;
+        }, false);
+        
+        modalContentContainer.addEventListener('touchend', function(event) {
+          touchEndX = event.changedTouches[0].screenX;
+          handleSwipe();
+        }, false);
+        
+        function handleSwipe() {
+          if (touchEndX < touchStartX - 50) {
+            // Sola kaydırma - sonraki görsel
+            currentIndex = (currentIndex + 1) % totalImages;
+            updateModalImage();
+          } else if (touchEndX > touchStartX + 50) {
+            // Sağa kaydırma - önceki görsel
+            currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+            updateModalImage();
+          }
+        }
+      });
+    </script>
+  </body>
+</html> 
